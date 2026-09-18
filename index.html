@@ -1,40 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>InfoServ | Encontre. Verifique. Vá.</title>
+
+  <meta
+    name="description"
+    content="InfoServ ajuda a encontrar medicamentos disponíveis em farmácias próximas."
+  />
 
   <style>
     :root {
       --navy: #0A1F44;
       --navy-2: #102C5B;
+
       --blue: #1769E0;
       --blue-dark: #0D55BD;
       --blue-light: #EAF1FF;
 
-      --green: #159447;
-      --green-light: #EAF8F0;
+      --green: #16A34A;
+      --green-light: #EAF8EF;
 
-      --yellow: #D98B00;
-      --yellow-light: #FFF6DF;
+      --yellow: #D97706;
+      --yellow-light: #FFF7E8;
 
-      --red: #D83A3A;
-      --red-light: #FDECEC;
+      --red: #DC2626;
+      --red-light: #FEF0F0;
 
       --bg: #F6F8FC;
       --white: #FFFFFF;
 
-      --text: #17243D;
-      --muted: #738098;
+      --text: #172033;
+      --muted: #667085;
+      --border: #E3E8F0;
 
-      --border: #E5EAF2;
+      --shadow-sm: 0 4px 14px rgba(10, 31, 68, 0.06);
+      --shadow-md: 0 12px 30px rgba(10, 31, 68, 0.10);
 
-      --shadow: 0 12px 35px rgba(10, 31, 68, .08);
-      --shadow-hover: 0 18px 45px rgba(10, 31, 68, .13);
-
-      --radius: 18px;
+      --radius: 16px;
     }
 
     * {
@@ -48,16 +53,22 @@
     }
 
     body {
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Helvetica, Arial, sans-serif;
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
       background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
+      line-height: 1.5;
     }
 
     button,
-    input,
-    select {
+    input {
       font: inherit;
     }
 
@@ -65,97 +76,76 @@
       cursor: pointer;
     }
 
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
     /* =========================
        HEADER
     ========================= */
 
-    .navbar {
+    header {
       position: sticky;
       top: 0;
       z-index: 100;
 
-      height: 76px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+
+      border-bottom: 1px solid rgba(227, 232, 240, 0.85);
+    }
+
+    .header-inner {
+      width: min(1180px, calc(100% - 32px));
+      min-height: 76px;
+      margin: 0 auto;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
-
-      padding: 0 6%;
-
-      background: rgba(255, 255, 255, .88);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      border-bottom: 1px solid rgba(229, 234, 242, .8);
+      gap: 30px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 11px;
-      cursor: pointer;
-      user-select: none;
+      min-width: 0;
     }
 
     .brand-logo {
-      width: 42px;
-      height: 42px;
+      display: block;
+
+      width: 165px;
+      height: auto;
+
       object-fit: contain;
-      border-radius: 11px;
     }
 
-    .logo-fallback {
-      width: 42px;
-      height: 42px;
-
-      display: none;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 11px;
-
-      background: var(--navy);
-      color: white;
-
-      font-weight: 800;
-      font-size: 15px;
-    }
-
-    .brand-name {
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--navy);
-      line-height: 1;
-    }
-
-    .brand-sub {
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .nav-content {
+    nav {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
     }
 
-    .nav-link {
-      border: 0;
+    .nav-btn {
+      border: none;
       background: transparent;
-      color: #52617A;
 
-      padding: 10px 13px;
+      padding: 10px 14px;
       border-radius: 10px;
 
+      color: #52617A;
       font-size: 14px;
       font-weight: 600;
 
-      transition: .2s;
+      transition:
+        background 0.2s ease,
+        color 0.2s ease;
     }
 
-    .nav-link:hover {
+    .nav-btn:hover {
       background: var(--blue-light);
       color: var(--blue);
     }
@@ -168,26 +158,31 @@
       min-height: calc(100vh - 76px);
     }
 
-    .page {
-      width: min(1120px, 92%);
+    .container {
+      width: min(1180px, calc(100% - 32px));
       margin: 0 auto;
     }
 
     /* =========================
-       HERO
+       HOME
     ========================= */
 
     .hero {
-      padding: 72px 0 45px;
+      padding: 70px 0 45px;
+    }
+
+    .hero-content {
+      max-width: 760px;
+      margin: 0 auto;
       text-align: center;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
 
-      padding: 8px 13px;
+      padding: 7px 12px;
 
       border-radius: 999px;
 
@@ -196,40 +191,38 @@
 
       font-size: 12px;
       font-weight: 700;
-
-      margin-bottom: 22px;
     }
 
     .badge-dot {
       width: 7px;
       height: 7px;
+
       border-radius: 50%;
-      background: var(--green);
+      background: var(--blue);
     }
 
     .hero h1 {
-      max-width: 760px;
-      margin: auto;
-
-      font-size: clamp(35px, 5vw, 58px);
-      line-height: 1.06;
-
-      letter-spacing: -2px;
+      margin-top: 22px;
 
       color: var(--navy);
+
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.06;
+      letter-spacing: -1.8px;
+      font-weight: 800;
     }
 
     .hero h1 span {
       color: var(--blue);
     }
 
-    .hero-description {
+    .hero p {
       max-width: 650px;
       margin: 22px auto 0;
 
       color: var(--muted);
 
-      font-size: 16px;
+      font-size: 17px;
       line-height: 1.7;
     }
 
@@ -239,7 +232,7 @@
 
     .search-wrapper {
       max-width: 760px;
-      margin: 32px auto 0;
+      margin: 34px auto 0;
     }
 
     .search-box {
@@ -247,32 +240,21 @@
       align-items: center;
       gap: 12px;
 
-      background: white;
+      padding: 8px 8px 8px 18px;
 
-      padding: 9px;
-
+      background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 17px;
+      border-radius: 15px;
 
-      box-shadow: var(--shadow);
-
-      transition: .2s;
-    }
-
-    .search-box:focus-within {
-      border-color: rgba(23, 105, 224, .45);
-      box-shadow: 0 15px 40px rgba(23, 105, 224, .12);
+      box-shadow: var(--shadow-md);
     }
 
     .search-icon {
       width: 21px;
       height: 21px;
-
-      color: #8A96A9;
-
-      margin-left: 10px;
-
       flex-shrink: 0;
+
+      color: #8A96AA;
     }
 
     .search-box input {
@@ -280,133 +262,132 @@
 
       min-width: 0;
 
-      border: 0;
-      outline: 0;
+      border: none;
+      outline: none;
 
       background: transparent;
 
       color: var(--text);
-
-      padding: 13px 0;
-
       font-size: 15px;
     }
 
     .search-box input::placeholder {
-      color: #9AA5B6;
+      color: #98A2B3;
     }
 
-    .btn-primary {
-      border: 0;
+    .search-btn {
+      border: none;
+
+      padding: 12px 19px;
+
+      border-radius: 11px;
 
       background: var(--blue);
       color: white;
 
-      padding: 13px 20px;
-
-      border-radius: 11px;
-
-      font-weight: 700;
       font-size: 14px;
+      font-weight: 700;
 
-      transition: .2s;
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
     }
 
-    .btn-primary:hover {
+    .search-btn:hover {
       background: var(--blue-dark);
       transform: translateY(-1px);
     }
 
+    /* =========================
+       QUICK SEARCHES
+    ========================= */
+
     .quick-searches {
+      margin-top: 20px;
+
       display: flex;
+      align-items: center;
       justify-content: center;
       flex-wrap: wrap;
       gap: 8px;
-
-      margin-top: 16px;
     }
 
-    .quick-title {
-      width: 100%;
-
-      color: var(--muted);
-
+    .quick-label {
+      color: #8A96AA;
       font-size: 12px;
-      margin-bottom: 3px;
     }
 
     .quick-btn {
       border: 1px solid var(--border);
+
+      padding: 7px 11px;
+
+      border-radius: 999px;
+
       background: white;
-
-      color: #56647A;
-
-      padding: 8px 12px;
-
-      border-radius: 9px;
+      color: #53617A;
 
       font-size: 12px;
       font-weight: 600;
 
-      transition: .2s;
+      transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
     }
 
     .quick-btn:hover {
-      border-color: #B8CDF1;
+      border-color: #B9CCEE;
       background: var(--blue-light);
       color: var(--blue);
     }
 
     /* =========================
-       INFO CARDS
+       HOME INFO CARDS
     ========================= */
+
+    .home-info {
+      padding: 20px 0 75px;
+    }
 
     .info-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-
-      margin: 30px 0 65px;
     }
 
     .info-card {
-      background: white;
+      padding: 24px;
 
+      background: white;
       border: 1px solid var(--border);
       border-radius: var(--radius);
 
-      padding: 25px;
-
-      box-shadow: 0 8px 25px rgba(10, 31, 68, .04);
-
-      transition: .25s;
-    }
-
-    .info-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow-sm);
     }
 
     .info-icon {
-      width: 44px;
-      height: 44px;
+      width: 42px;
+      height: 42px;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      border-radius: 13px;
+      margin-bottom: 17px;
+
+      border-radius: 12px;
 
       background: var(--blue-light);
       color: var(--blue);
-
-      margin-bottom: 18px;
     }
 
     .info-card h3 {
-      color: var(--navy);
-      font-size: 16px;
       margin-bottom: 8px;
+
+      color: var(--navy);
+
+      font-size: 16px;
     }
 
     .info-card p {
@@ -419,123 +400,127 @@
        RESULTS
     ========================= */
 
-    .results-page {
-      padding: 35px 0 70px;
+    .results-section {
+      padding: 45px 0 75px;
     }
 
-    .back-btn {
-      border: 0;
-      background: transparent;
-
-      color: var(--blue);
-
-      font-weight: 700;
-      font-size: 13px;
-
-      margin-bottom: 25px;
-    }
-
-    .results-heading {
+    .page-heading {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-
-      gap: 25px;
+      gap: 20px;
 
       margin-bottom: 24px;
     }
 
-    .results-heading h1 {
-      font-size: clamp(28px, 4vw, 40px);
+    .heading-left h1 {
       color: var(--navy);
-      letter-spacing: -.8px;
+
+      font-size: 30px;
+      line-height: 1.15;
     }
 
-    .results-heading p {
+    .heading-left p {
       margin-top: 7px;
+
       color: var(--muted);
       font-size: 14px;
     }
 
-    .result-search {
-      width: 420px;
-      max-width: 100%;
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      border: 1px solid var(--border);
+
+      padding: 9px 13px;
+
+      border-radius: 10px;
+
+      background: white;
+      color: #53617A;
+
+      font-size: 13px;
+      font-weight: 600;
     }
 
-    .result-search .search-box {
-      box-shadow: none;
+    .back-btn:hover {
+      border-color: #B9CCEE;
+      color: var(--blue);
+      background: var(--blue-light);
     }
 
     .results-toolbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       gap: 15px;
 
-      margin: 24px 0 15px;
+      margin-bottom: 18px;
     }
 
-    .results-count {
+    .result-count {
       color: var(--muted);
       font-size: 13px;
     }
 
     .filter-select {
       border: 1px solid var(--border);
-      background: white;
+      outline: none;
 
       padding: 9px 12px;
 
-      border-radius: 9px;
+      border-radius: 10px;
 
-      color: #52617A;
+      background: white;
+      color: #53617A;
 
-      outline: none;
-
-      font-size: 12px;
+      font-size: 13px;
     }
 
     /* =========================
-       PHARMACY CARDS
+       PHARMACY GRID
     ========================= */
 
-    .pharmacy-list {
+    .pharmacy-grid {
       display: grid;
-      gap: 13px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
     }
 
     .pharmacy-card {
+      padding: 20px;
+
       background: white;
-
       border: 1px solid var(--border);
-      border-radius: 17px;
+      border-radius: var(--radius);
 
-      padding: 21px;
+      box-shadow: var(--shadow-sm);
 
-      box-shadow: 0 7px 25px rgba(10, 31, 68, .045);
-
-      transition: .25s;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
     }
 
     .pharmacy-card:hover {
-      border-color: #D4DEEF;
-      box-shadow: var(--shadow);
       transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: #D1DDEF;
     }
 
     .pharmacy-top {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-
       gap: 15px;
     }
 
     .pharmacy-name {
       color: var(--navy);
       font-size: 17px;
-      font-weight: 800;
+      font-weight: 750;
     }
 
     .pharmacy-location {
@@ -543,10 +528,9 @@
       align-items: center;
       gap: 5px;
 
-      margin-top: 6px;
+      margin-top: 5px;
 
       color: var(--muted);
-
       font-size: 12px;
     }
 
@@ -555,14 +539,14 @@
       align-items: center;
       gap: 6px;
 
-      padding: 7px 10px;
+      padding: 6px 9px;
 
       border-radius: 999px;
 
-      font-size: 11px;
-      font-weight: 800;
-
       white-space: nowrap;
+
+      font-size: 11px;
+      font-weight: 700;
     }
 
     .status-dot {
@@ -572,8 +556,8 @@
     }
 
     .status.available {
-      color: var(--green);
       background: var(--green-light);
+      color: var(--green);
     }
 
     .status.available .status-dot {
@@ -581,8 +565,8 @@
     }
 
     .status.limited {
-      color: var(--yellow);
       background: var(--yellow-light);
+      color: var(--yellow);
     }
 
     .status.limited .status-dot {
@@ -590,573 +574,411 @@
     }
 
     .status.unavailable {
-      color: var(--red);
       background: var(--red-light);
+      color: var(--red);
     }
 
     .status.unavailable .status-dot {
       background: var(--red);
     }
 
-    .pharmacy-data {
+    .pharmacy-details {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
 
-      border-top: 1px solid var(--border);
+      margin-top: 19px;
 
-      margin-top: 17px;
-      padding-top: 17px;
-
-      gap: 12px;
+      border-top: 1px solid #EEF1F5;
+      border-bottom: 1px solid #EEF1F5;
     }
 
-    .data-label {
-      display: block;
+    .detail-item {
+      padding: 13px 8px;
 
-      color: #9AA5B6;
+      border-right: 1px solid #EEF1F5;
+    }
 
+    .detail-item:last-child {
+      border-right: none;
+    }
+
+    .detail-label {
+      color: #98A2B3;
       font-size: 10px;
-      text-transform: uppercase;
-
-      letter-spacing: .4px;
-
-      margin-bottom: 4px;
     }
 
-    .data-value {
-      color: #34415A;
+    .detail-value {
+      margin-top: 3px;
+
+      color: #3A465B;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 650;
     }
 
-    .pharmacy-bottom {
+    .availability-message {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 7px;
 
-      gap: 15px;
+      margin-top: 15px;
 
-      margin-top: 17px;
+      font-size: 12px;
+      font-weight: 600;
     }
 
-    .last-update {
-      color: #8A96A9;
-      font-size: 11px;
+    .availability-message.good {
+      color: var(--green);
+    }
+
+    .availability-message.warning {
+      color: var(--yellow);
+    }
+
+    .availability-message.bad {
+      color: var(--red);
     }
 
     .card-actions {
       display: flex;
-      gap: 8px;
+      gap: 9px;
+
+      margin-top: 17px;
     }
 
-    .btn-secondary,
-    .btn-route {
-      border-radius: 9px;
+    .action-btn {
+      flex: 1;
 
-      padding: 9px 13px;
-
-      font-size: 11px;
-      font-weight: 700;
-
-      transition: .2s;
-    }
-
-    .btn-secondary {
-      background: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
 
       border: 1px solid var(--border);
 
-      color: #506078;
+      padding: 10px 12px;
+
+      border-radius: 10px;
+
+      background: white;
+      color: #53617A;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
     }
 
-    .btn-secondary:hover {
-      background: #F7F9FC;
-      border-color: #C9D4E5;
+    .action-btn:hover {
+      border-color: #B9CCEE;
+      background: var(--blue-light);
+      color: var(--blue);
     }
 
-    .btn-route {
-      background: var(--navy);
+    .action-btn.primary {
+      border-color: var(--blue);
+      background: var(--blue);
       color: white;
-
-      border: 1px solid var(--navy);
     }
 
-    .btn-route:hover {
-      background: var(--navy-2);
+    .action-btn.primary:hover {
+      border-color: var(--blue-dark);
+      background: var(--blue-dark);
+      color: white;
+    }
+
+    /* =========================
+       DETAILS PAGE
+    ========================= */
+
+    .detail-page {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 45px 0 75px;
+    }
+
+    .detail-box {
+      padding: 30px;
+
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      box-shadow: var(--shadow-md);
+    }
+
+    .detail-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+
+      padding-bottom: 24px;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .detail-title h1 {
+      color: var(--navy);
+      font-size: 28px;
+    }
+
+    .detail-title p {
+      margin-top: 6px;
+
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .detail-section {
+      padding-top: 25px;
+    }
+
+    .detail-section h3 {
+      margin-bottom: 13px;
+
+      color: var(--navy);
+      font-size: 15px;
+    }
+
+    .detail-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .detail-box-item {
+      padding: 14px;
+
+      border: 1px solid var(--border);
+      border-radius: 11px;
+
+      background: #FAFBFD;
+    }
+
+    .detail-box-item span {
+      display: block;
+
+      color: #98A2B3;
+      font-size: 11px;
+    }
+
+    .detail-box-item strong {
+      display: block;
+
+      margin-top: 4px;
+
+      color: #344054;
+      font-size: 13px;
     }
 
     /* =========================
        NOT FOUND
     ========================= */
 
-    .not-found-wrapper {
-      max-width: 720px;
+    .not-found {
+      max-width: 650px;
 
-      margin: 50px auto 80px;
+      margin: 45px auto 75px;
+      padding: 40px 25px;
 
       text-align: center;
+
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+
+      box-shadow: var(--shadow-sm);
     }
 
     .not-found-icon {
-      width: 68px;
-      height: 68px;
+      width: 55px;
+      height: 55px;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      margin: 0 auto 20px;
+      margin: 0 auto 17px;
 
-      border-radius: 20px;
+      border-radius: 15px;
 
-      background: #F0F3F8;
-      color: #71809A;
+      background: var(--yellow-light);
+      color: var(--yellow);
     }
 
-    .not-found-wrapper h1 {
+    .not-found h2 {
       color: var(--navy);
-
-      font-size: 30px;
-
-      margin-bottom: 10px;
+      font-size: 23px;
     }
 
-    .not-found-wrapper p {
-      color: var(--muted);
+    .not-found p {
+      max-width: 470px;
+      margin: 10px auto 0;
 
+      color: var(--muted);
       font-size: 14px;
-      line-height: 1.7;
-
-      max-width: 550px;
-      margin: 0 auto;
     }
 
-    .searched-medicine {
-      display: inline-block;
-
-      margin-top: 15px;
-
-      padding: 8px 12px;
-
-      border-radius: 8px;
-
-      background: var(--blue-light);
-      color: var(--blue);
-
-      font-size: 13px;
-      font-weight: 800;
+    .registered {
+      margin-top: 24px;
     }
 
-    .not-found-note {
-      margin: 24px auto;
-
-      max-width: 580px;
-
-      padding: 15px 18px;
-
-      border: 1px solid var(--border);
-      border-radius: 12px;
-
-      background: white;
-
-      color: #66738A;
-
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .registered-box {
-      margin-top: 28px;
-    }
-
-    .registered-box p {
-      font-size: 12px;
-      margin-bottom: 12px;
-    }
-
-    /* =========================
-       DETAILS
-    ========================= */
-
-    .details-page {
-      padding: 35px 0 70px;
-    }
-
-    .details-card {
-      background: white;
-
-      border: 1px solid var(--border);
-      border-radius: 20px;
-
-      box-shadow: var(--shadow);
-
-      overflow: hidden;
-    }
-
-    .details-header {
-      padding: 27px;
-
-      background: linear-gradient(
-        135deg,
-        #F8FAFE,
-        #FFFFFF
-      );
-
-      border-bottom: 1px solid var(--border);
-    }
-
-    .details-header h1 {
-      color: var(--navy);
-      font-size: 28px;
-    }
-
-    .details-header p {
-      color: var(--muted);
-      margin-top: 6px;
-      font-size: 13px;
-    }
-
-    .details-body {
-      padding: 27px;
-    }
-
-    .medicine-highlight {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 20px;
-
-      padding: 17px;
-
-      border-radius: 13px;
-
-      background: #F7F9FD;
-
-      margin-bottom: 22px;
-    }
-
-    .medicine-highlight small {
-      display: block;
-
-      color: #8A96A9;
-
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: .4px;
-
-      margin-bottom: 5px;
-    }
-
-    .medicine-highlight strong {
-      color: var(--navy);
-      font-size: 15px;
-    }
-
-    .detail-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-
-      gap: 13px;
-    }
-
-    .detail-item {
-      border: 1px solid var(--border);
-      border-radius: 13px;
-
-      padding: 16px;
-    }
-
-    .detail-item span {
-      display: block;
-
-      color: #929DB0;
-
-      font-size: 10px;
-      text-transform: uppercase;
-
-      margin-bottom: 5px;
-    }
-
-    .detail-item strong {
-      color: #35435C;
-      font-size: 13px;
-    }
-
-    .detail-notice {
-      margin-top: 18px;
-
-      padding: 15px;
-
-      border-radius: 12px;
-
-      background: var(--blue-light);
-
-      color: #49668F;
-
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .details-actions {
-      display: flex;
-      gap: 10px;
-
-      margin-top: 23px;
-    }
-
-    /* =========================
-       ABOUT
-    ========================= */
-
-    .about-page {
-      padding: 65px 0 80px;
-    }
-
-    .about-hero {
-      max-width: 750px;
-      margin-bottom: 42px;
-    }
-
-    .about-hero h1 {
-      color: var(--navy);
-
-      font-size: clamp(34px, 5vw, 50px);
-
-      letter-spacing: -1.5px;
-
-      line-height: 1.1;
-    }
-
-    .about-hero h1 span {
-      color: var(--blue);
-    }
-
-    .about-hero p {
-      margin-top: 17px;
-
-      color: var(--muted);
-
-      line-height: 1.7;
-
-      font-size: 15px;
-    }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-
-      gap: 18px;
-    }
-
-    .step {
-      position: relative;
-
-      background: white;
-
-      border: 1px solid var(--border);
-
-      border-radius: 18px;
-
-      padding: 25px;
-
-      box-shadow: 0 8px 25px rgba(10, 31, 68, .04);
-    }
-
-    .step-number {
-      width: 34px;
-      height: 34px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 10px;
-
-      background: var(--navy);
-      color: white;
-
-      font-size: 12px;
-      font-weight: 800;
-
-      margin-bottom: 19px;
-    }
-
-    .step h3 {
-      color: var(--navy);
-      font-size: 16px;
-
-      margin-bottom: 8px;
-    }
-
-    .step p {
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.65;
-    }
-
-    .about-note {
-      margin-top: 25px;
-
-      padding: 18px;
-
-      border-radius: 13px;
-
-      background: white;
-
-      border: 1px solid var(--border);
-
-      color: #66738A;
-
-      font-size: 12px;
-
-      line-height: 1.7;
+    .registered p {
+      margin-bottom: 10px;
+
+      color: #98A2B3;
+      font-size: 11px;
     }
 
     /* =========================
        FOOTER
     ========================= */
 
-    .footer {
-      margin-top: 35px;
+    footer {
+      margin-top: 20px;
 
       background: var(--navy);
       color: white;
     }
 
     .footer-inner {
-      width: min(1120px, 92%);
-      margin: auto;
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
 
-      padding: 42px 0 28px;
+      padding: 42px 0 25px;
+    }
 
+    .footer-top {
       display: grid;
-      grid-template-columns: 1.6fr 1fr 1fr;
-      gap: 45px;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 50px;
+
+      padding-bottom: 32px;
     }
 
     .footer-brand {
-      font-size: 18px;
-      font-weight: 800;
+      max-width: 390px;
     }
 
-    .footer-description {
-      max-width: 360px;
+    .footer-brand img {
+      width: 150px;
+      height: auto;
 
-      color: rgba(255,255,255,.65);
-
-      font-size: 12px;
-      line-height: 1.7;
-
-      margin-top: 10px;
-    }
-
-    .footer-title {
-      font-size: 12px;
-      font-weight: 800;
-
-      margin-bottom: 13px;
-    }
-
-    .footer-link {
       display: block;
 
-      border: 0;
+      margin-bottom: 15px;
+
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-brand p {
+      color: #B7C3D9;
+
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .footer-column h4 {
+      margin-bottom: 13px;
+
+      color: white;
+      font-size: 13px;
+    }
+
+    .footer-column p,
+    .footer-column button {
+      display: block;
+
+      margin-bottom: 8px;
+
+      border: none;
       background: transparent;
 
-      color: rgba(255,255,255,.65);
+      color: #B7C3D9;
 
       font-size: 12px;
-
-      padding: 4px 0;
-
-      cursor: pointer;
-
       text-align: left;
     }
 
-    .footer-link:hover {
+    .footer-column button {
+      cursor: pointer;
+    }
+
+    .footer-column button:hover {
       color: white;
     }
 
     .footer-bottom {
-      width: min(1120px, 92%);
-      margin: auto;
-
-      border-top: 1px solid rgba(255,255,255,.1);
-
-      padding: 17px 0;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       gap: 15px;
 
-      color: rgba(255,255,255,.48);
+      padding-top: 20px;
 
-      font-size: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+      color: #8FA0BD;
+      font-size: 11px;
     }
 
-    /* =========================
-       DEMO LABEL
-    ========================= */
-
-    .demo-label {
+    .prototype-label {
       position: fixed;
-
       right: 15px;
       bottom: 15px;
-
-      z-index: 200;
-
-      background: rgba(10,31,68,.93);
-      color: white;
+      z-index: 50;
 
       padding: 7px 10px;
 
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 8px;
+
+      background: rgba(10, 31, 68, 0.94);
+      color: #DCE8FA;
 
       font-size: 9px;
       font-weight: 700;
-
-      box-shadow: 0 7px 20px rgba(0,0,0,.15);
+      letter-spacing: 0.4px;
     }
 
     /* =========================
        TOAST
     ========================= */
 
-    #toast {
+    .toast {
       position: fixed;
-
       left: 50%;
-      bottom: 25px;
+      bottom: 28px;
+      z-index: 200;
 
-      transform: translate(-50%, 100px);
+      transform: translate(-50%, 120px);
 
-      z-index: 300;
+      max-width: calc(100% - 30px);
 
-      background: var(--navy);
-      color: white;
+      padding: 12px 16px;
 
-      padding: 12px 17px;
+      border: 1px solid #D8E3F4;
+      border-radius: 11px;
 
-      border-radius: 10px;
+      background: white;
+      color: #344054;
+
+      box-shadow: var(--shadow-md);
 
       font-size: 12px;
       font-weight: 600;
 
-      box-shadow: 0 12px 30px rgba(0,0,0,.2);
-
       opacity: 0;
 
-      transition: .3s;
-
-      pointer-events: none;
+      transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
     }
 
-    #toast.show {
+    .toast.show {
       transform: translate(-50%, 0);
       opacity: 1;
     }
@@ -1165,131 +987,126 @@
        RESPONSIVE
     ========================= */
 
-    @media (max-width: 800px) {
-
-      .navbar {
-        padding: 0 4%;
+    @media (max-width: 850px) {
+      .header-inner {
+        min-height: 68px;
       }
 
-      .nav-about {
+      .brand-logo {
+        width: 140px;
+      }
+
+      nav {
         display: none;
       }
 
       .hero {
-        padding-top: 55px;
+        padding-top: 50px;
       }
 
-      .info-grid,
-      .steps {
+      .info-grid {
         grid-template-columns: 1fr;
       }
 
-      .results-heading {
-        align-items: flex-start;
-        flex-direction: column;
+      .pharmacy-grid {
+        grid-template-columns: 1fr;
       }
 
-      .result-search {
-        width: 100%;
-      }
-
-      .pharmacy-data {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .footer-inner {
+      .footer-top {
         grid-template-columns: 1fr 1fr;
+        gap: 30px;
       }
 
-      .footer-main {
+      .footer-brand {
         grid-column: 1 / -1;
       }
     }
 
-    @media (max-width: 470px) {
-
-      .navbar {
-        height: 68px;
-      }
-
-      .brand-sub {
-        display: none;
-      }
-
-      .brand-logo,
-      .logo-fallback {
-        width: 38px;
-        height: 38px;
-      }
-
-      .brand-name {
-        font-size: 16px;
-      }
-
-      .nav-link {
-        padding: 8px;
-        font-size: 12px;
+    @media (max-width: 600px) {
+      .container,
+      .header-inner,
+      .footer-inner {
+        width: min(100% - 24px, 1180px);
       }
 
       .hero {
-        padding: 45px 0 30px;
+        padding: 42px 0 30px;
       }
 
       .hero h1 {
-        font-size: 35px;
-        letter-spacing: -1.2px;
+        font-size: 38px;
       }
 
-      .hero-description {
-        font-size: 14px;
+      .hero p {
+        font-size: 15px;
       }
 
       .search-box {
-        padding: 7px;
+        padding: 7px 7px 7px 13px;
+      }
+
+      .search-btn {
+        padding: 11px 13px;
       }
 
       .search-box input {
         font-size: 13px;
       }
 
-      .btn-primary {
-        padding: 12px 13px;
+      .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .results-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
       .pharmacy-top {
         flex-direction: column;
       }
 
-      .pharmacy-bottom {
-        align-items: flex-start;
-        flex-direction: column;
+      .status {
+        align-self: flex-start;
       }
 
-      .card-actions {
-        width: 100%;
-      }
-
-      .btn-secondary,
-      .btn-route {
-        flex: 1;
-      }
-
-      .detail-grid {
+      .pharmacy-details {
         grid-template-columns: 1fr;
       }
 
-      .details-actions {
-        flex-direction: column;
+      .detail-item {
+        border-right: none;
+        border-bottom: 1px solid #EEF1F5;
       }
 
-      .footer-inner {
+      .detail-item:last-child {
+        border-bottom: none;
+      }
+
+      .detail-row {
         grid-template-columns: 1fr;
-        gap: 25px;
+      }
+
+      .detail-box {
+        padding: 20px;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-brand {
+        grid-column: auto;
       }
 
       .footer-bottom {
         flex-direction: column;
         align-items: flex-start;
+      }
+
+      .prototype-label {
+        display: none;
       }
     }
   </style>
@@ -1299,103 +1116,125 @@
 
   <!-- =========================
        HEADER
-  ========================== -->
+  ========================= -->
 
-  <header class="navbar">
+  <header>
+    <div class="header-inner">
 
-    <div class="brand" onclick="home()">
+      <a href="#" class="brand" onclick="goHome(); return false;">
+        <img
+          src="logo.png"
+          alt="InfoServ"
+          class="brand-logo"
+        />
+      </a>
 
-      <img
-        src="logo.png"
-        class="brand-logo"
-        id="logo"
-        alt="InfoServ"
-        onerror="
-          this.style.display='none';
-          document.getElementById('fallback').style.display='flex';
-        "
-      >
+      <nav>
+        <button class="nav-btn" onclick="goHome()">
+          Início
+        </button>
 
-      <div class="logo-fallback" id="fallback">
-        IS
-      </div>
+        <button class="nav-btn" onclick="showHowItWorks()">
+          Como funciona
+        </button>
 
-      <div>
-        <div class="brand-name">
-          InfoServ
-        </div>
-
-        <div class="brand-sub">
-          Encontre. Verifique. Vá.
-        </div>
-      </div>
+        <button class="nav-btn" onclick="showAbout()">
+          Sobre o InfoServ
+        </button>
+      </nav>
 
     </div>
-
-    <nav class="nav-content">
-
-      <button
-        class="nav-link"
-        onclick="home()"
-      >
-        Início
-      </button>
-
-      <button
-        class="nav-link"
-        onclick="showAbout()"
-      >
-        Como funciona
-      </button>
-
-      <button
-        class="nav-link nav-about"
-        onclick="showAbout()"
-      >
-        Sobre o InfoServ
-      </button>
-
-    </nav>
-
   </header>
 
 
   <!-- =========================
-       APPLICATION
-  ========================== -->
+       MAIN
+  ========================= -->
 
   <main id="app"></main>
 
 
   <!-- =========================
-       TOAST
-  ========================== -->
+       FOOTER
+  ========================= -->
 
-  <div id="toast"></div>
+  <footer>
+    <div class="footer-inner">
+
+      <div class="footer-top">
+
+        <div class="footer-brand">
+          <img src="logo.png" alt="InfoServ" />
+
+          <p>
+            O InfoServ facilita a procura por medicamentos,
+            permitindo ao utilizador verificar informações sobre
+            farmácias antes de se deslocar.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Navegação</h4>
+
+          <button onclick="goHome()">
+            Início
+          </button>
+
+          <button onclick="showHowItWorks()">
+            Como funciona
+          </button>
+
+          <button onclick="showAbout()">
+            Sobre o InfoServ
+          </button>
+        </div>
+
+        <div class="footer-column">
+          <h4>InfoServ</h4>
+
+          <p>Serviço de farmácia</p>
+          <p>Disponibilidade de medicamentos</p>
+          <p>Informação para o utilizador</p>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 InfoServ. Todos os direitos reservados.
+        </span>
+
+        <span>
+          Protótipo em desenvolvimento
+        </span>
+
+      </div>
+
+    </div>
+  </footer>
 
 
-  <!-- =========================
-       DEMO
-  ========================== -->
-
-  <div class="demo-label">
+  <div class="prototype-label">
     PROTÓTIPO • DADOS DE DEMONSTRAÇÃO
   </div>
+
+  <div id="toast" class="toast"></div>
 
 
   <script>
 
-    /* =====================================================
-       ÍCONES
-    ===================================================== */
+    /* =========================
+       ICONS
+    ========================= */
 
     const icons = {
 
       search: `
         <svg
-          viewBox="0 0 24 24"
           width="20"
           height="20"
+          viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
@@ -1409,9 +1248,9 @@
 
       check: `
         <svg
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
-          width="20"
-          height="20"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
@@ -1424,42 +1263,42 @@
 
       location: `
         <svg
+          width="16"
+          height="16"
           viewBox="0 0 24 24"
-          width="15"
-          height="15"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
         >
-          <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+          <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
           <circle cx="12" cy="10" r="2.5"></circle>
         </svg>
       `,
 
       route: `
         <svg
-          viewBox="0 0 24 24"
           width="15"
           height="15"
+          viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
         >
-          <circle cx="6" cy="19" r="2"></circle>
-          <circle cx="18" cy="5" r="2"></circle>
-          <path d="M8 19h2a4 4 0 0 0 4-4V9a4 4 0 0 1 4-4"></path>
+          <circle cx="6" cy="19" r="3"></circle>
+          <circle cx="18" cy="5" r="3"></circle>
+          <path d="M8.5 17.5 15.5 7.5"></path>
         </svg>
       `,
 
       info: `
         <svg
-          viewBox="0 0 24 24"
           width="20"
           height="20"
+          viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
@@ -1474,26 +1313,41 @@
 
       alert: `
         <svg
+          width="22"
+          height="22"
           viewBox="0 0 24 24"
-          width="28"
-          height="28"
           fill="none"
           stroke="currentColor"
-          stroke-width="1.8"
+          stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
         >
-          <circle cx="12" cy="12" r="9"></circle>
-          <path d="M12 8v5"></path>
-          <path d="M12 16h.01"></path>
+          <path d="M10.3 3.7 2.5 17a2 2 0 0 0 1.7 3h15.6a2 2 0 0 0 1.7-3L13.7 3.7a2 2 0 0 0-3.4 0Z"></path>
+          <path d="M12 9v4"></path>
+          <path d="M12 17h.01"></path>
+        </svg>
+      `,
+
+      arrow: `
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="m9 18 6-6-6-6"></path>
         </svg>
       `
     };
 
 
-    /* =====================================================
-       DADOS DO PROTÓTIPO
-    ===================================================== */
+    /* =========================
+       DATA
+    ========================= */
 
     const medicines = [
       "Paracetamol 500mg",
@@ -1510,363 +1364,140 @@
       {
         id: 1,
         name: "Farmácia Central",
-        location: "Centro, Huambo",
+        neighborhood: "Centro",
+        city: "Huambo",
         status: "available",
-        statusText: "Disponível",
         distance: "0,8 km",
         queue: "3 pessoas",
-        hours: "07:00 – 21:00",
+        hours: "07:00–21:00",
         updated: "há 4 min",
-        stock: "Boa disponibilidade"
+        message: "Boa disponibilidade"
       },
 
       {
         id: 2,
         name: "Farmácia Saúde+",
-        location: "São João, Huambo",
+        neighborhood: "São João",
+        city: "Huambo",
         status: "available",
-        statusText: "Disponível",
         distance: "1,4 km",
         queue: "6 pessoas",
-        hours: "07:30 – 20:30",
+        hours: "07:30–20:30",
         updated: "há 8 min",
-        stock: "Disponível"
+        message: "Disponível"
       },
 
       {
         id: 3,
         name: "Farmácia Vida",
-        location: "Bom Pastor, Huambo",
+        neighborhood: "Bom Pastor",
+        city: "Huambo",
         status: "limited",
-        statusText: "Poucas unidades",
         distance: "2,1 km",
         queue: "2 pessoas",
-        hours: "08:00 – 19:30",
+        hours: "08:00–19:30",
         updated: "há 12 min",
-        stock: "Poucas unidades"
+        message: "Poucas unidades"
       },
 
       {
         id: 4,
         name: "Farmácia Nova Esperança",
-        location: "Fátima, Huambo",
+        neighborhood: "Fátima",
+        city: "Huambo",
         status: "available",
-        statusText: "Disponível",
         distance: "2,8 km",
         queue: "8 pessoas",
-        hours: "07:00 – 22:00",
+        hours: "07:00–22:00",
         updated: "há 6 min",
-        stock: "Disponível"
+        message: "Disponível"
       },
 
       {
         id: 5,
         name: "Farmácia Bom Jesus",
-        location: "Calomanda, Huambo",
+        neighborhood: "Calomanda",
+        city: "Huambo",
         status: "unavailable",
-        statusText: "Não disponível",
         distance: "3,5 km",
         queue: "Sem fila",
-        hours: "08:00 – 20:00",
+        hours: "08:00–20:00",
         updated: "há 19 min",
-        stock: "Não disponível"
+        message: "Não disponível"
       }
 
     ];
 
 
-    /* =====================================================
+    /* =========================
        HOME
-    ===================================================== */
+    ========================= */
 
     function home() {
 
-      document.getElementById("app").innerHTML = `
+      return `
 
-        <section class="page">
+        <section class="hero">
 
-          <div class="hero">
+          <div class="container">
 
-            <div class="badge">
-              <span class="badge-dot"></span>
-              Informação reportada por agentes InfoServ
-            </div>
+            <div class="hero-content">
 
-            <h1>
-              Encontre o medicamento
-              <span>que procura.</span>
-            </h1>
-
-            <p class="hero-description">
-              Pesquise um medicamento e consulte as farmácias
-              onde existem informações disponíveis sobre a sua
-              disponibilidade.
-            </p>
-
-
-            <div class="search-wrapper">
-
-              <div class="search-box">
-
-                <div class="search-icon">
-                  ${icons.search}
-                </div>
-
-                <input
-                  id="homeSearch"
-                  type="text"
-                  list="medicineList"
-                  placeholder="Digite o nome do medicamento..."
-                  onkeydown="
-                    if(event.key === 'Enter'){
-                      search();
-                    }
-                  "
-                >
-
-                <datalist id="medicineList">
-
-                  ${medicines.map(m => `
-                    <option value="${m}">
-                  `).join("")}
-
-                </datalist>
-
-                <button
-                  class="btn-primary"
-                  onclick="search()"
-                >
-                  Pesquisar
-                </button>
-
-              </div>
-
-
-              <div class="quick-searches">
-
-                <div class="quick-title">
-                  Pesquisas rápidas
-                </div>
-
-                ${medicines.slice(0, 4).map(m => `
-                  <button
-                    class="quick-btn"
-                    onclick="quick('${escapeAttr(m)}')"
-                  >
-                    ${escapeHTML(m)}
-                  </button>
-                `).join("")}
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="info-grid">
-
-            <div class="info-card">
-
-              <div class="info-icon">
-                ${icons.search}
-              </div>
-
-              <h3>
-                Pesquise pelo medicamento
-              </h3>
-
-              <p>
-                Informe o nome do medicamento que pretende
-                encontrar.
-              </p>
-
-            </div>
-
-
-            <div class="info-card">
-
-              <div class="info-icon">
-                ${icons.check}
-              </div>
-
-              <h3>
-                Consulte as opções
-              </h3>
-
-              <p>
-                Veja as farmácias com informação registada
-                sobre disponibilidade.
-              </p>
-
-            </div>
-
-
-            <div class="info-card">
-
-              <div class="info-icon">
-                ${icons.route}
-              </div>
-
-              <h3>
-                Decida onde ir
-              </h3>
-
-              <p>
-                Compare localização, disponibilidade e
-                outras informações antes de se deslocar.
-              </p>
-
-            </div>
-
-          </div>
-
-        </section>
-
-        ${footer()}
-
-      `;
-
-    }
-
-
-    /* =====================================================
-       PESQUISA RÁPIDA
-    ===================================================== */
-
-    function quick(medicine) {
-
-      const input = document.getElementById("homeSearch");
-
-      if(input) {
-        input.value = medicine;
-      }
-
-      search();
-
-    }
-
-
-    /* =====================================================
-       PESQUISA PRINCIPAL
-    ===================================================== */
-
-    function search() {
-
-      const input =
-        document.getElementById("homeSearch");
-
-      const value =
-        (input?.value || "").trim();
-
-
-      if(!value) {
-
-        toast(
-          "Digite o nome do medicamento."
-        );
-
-        return;
-      }
-
-
-      const medicine =
-        medicines.find(
-          m =>
-            m.toLowerCase() ===
-            value.toLowerCase()
-        );
-
-
-      if(medicine) {
-
-        results(medicine);
-
-      } else {
-
-        notFound(value);
-
-      }
-
-    }
-
-
-    /* =====================================================
-       MEDICAMENTO NÃO ENCONTRADO
-    ===================================================== */
-
-    function notFound(medicine) {
-
-      document.getElementById("app").innerHTML = `
-
-        <section class="page">
-
-          <div class="results-page">
-
-            <button
-              class="back-btn"
-              onclick="home()"
-            >
-              ← Voltar para a pesquisa
-            </button>
-
-
-            <div class="not-found-wrapper">
-
-              <div class="not-found-icon">
-                ${icons.alert}
+              <div class="badge">
+                <span class="badge-dot"></span>
+                Informação de demonstração
               </div>
 
               <h1>
-                Medicamento não encontrado
+                Encontre o medicamento.<br>
+                <span>Verifique antes de ir.</span>
               </h1>
 
               <p>
-                Ainda não existem informações cadastradas
-                no InfoServ para o medicamento pesquisado.
+                Pesquise um medicamento e descubra farmácias
+                onde poderá encontrá-lo, com informações sobre
+                disponibilidade, distância e fila.
               </p>
 
-              <div class="searched-medicine">
-                ${escapeHTML(medicine)}
-              </div>
 
+              <div class="search-wrapper">
 
-              <div class="not-found-note">
+                <div class="search-box">
 
-                O medicamento pode ainda não estar registado
-                no protótipo ou não possuir informações
-                disponíveis neste momento.
+                  <div class="search-icon">
+                    ${icons.search}
+                  </div>
 
-                <br><br>
+                  <input
+                    id="medicineInput"
+                    type="text"
+                    placeholder="Digite o nome do medicamento..."
+                    autocomplete="off"
+                    onkeydown="handleSearchKey(event)"
+                  />
 
-                Tente pesquisar outro medicamento ou escolha
-                uma das opções já disponíveis no sistema.
+                  <button
+                    class="search-btn"
+                    onclick="searchMedicine()"
+                  >
+                    Pesquisar
+                  </button>
 
-              </div>
+                </div>
 
-
-              <button
-                class="btn-primary"
-                onclick="home()"
-              >
-                Fazer nova pesquisa
-              </button>
-
-
-              <div class="registered-box">
-
-                <p>
-                  Medicamentos disponíveis no protótipo:
-                </p>
 
                 <div class="quick-searches">
 
-                  ${medicines.map(m => `
+                  <span class="quick-label">
+                    Pesquisas rápidas:
+                  </span>
+
+                  ${medicines.slice(0, 4).map(medicine => `
                     <button
                       class="quick-btn"
-                      onclick="results('${escapeAttr(m)}')"
+                      onclick="search('${medicine}')"
                     >
-                      ${escapeHTML(m)}
+                      ${medicine}
                     </button>
                   `).join("")}
 
@@ -1880,118 +1511,183 @@
 
         </section>
 
-        ${footer()}
 
-      `;
+        <section class="home-info">
 
-    }
+          <div class="container">
 
+            <div class="info-grid">
 
-    /* =====================================================
-       RESULTADOS
-    ===================================================== */
+              <div class="info-card">
 
-    function results(medicine) {
+                <div class="info-icon">
+                  ${icons.search}
+                </div>
 
-      const registered =
-        medicines.find(
-          m =>
-            m.toLowerCase() ===
-            medicine.toLowerCase()
-        );
-
-
-      if(!registered) {
-
-        notFound(medicine);
-
-        return;
-
-      }
-
-
-      document.getElementById("app").innerHTML = `
-
-        <section class="page">
-
-          <div class="results-page">
-
-            <button
-              class="back-btn"
-              onclick="home()"
-            >
-              ← Nova pesquisa
-            </button>
-
-
-            <div class="results-heading">
-
-              <div>
-
-                <h1>
-                  ${escapeHTML(registered)}
-                </h1>
+                <h3>
+                  Pesquise
+                </h3>
 
                 <p>
-                  Farmácias com informação de demonstração
-                  para esta pesquisa.
+                  Procure pelo nome do medicamento que
+                  pretende encontrar.
                 </p>
 
               </div>
 
 
-              <div class="result-search">
+              <div class="info-card">
 
-                <div class="search-box">
-
-                  <div class="search-icon">
-                    ${icons.search}
-                  </div>
-
-                  <input
-                    id="resultSearch"
-                    type="text"
-                    value="${escapeAttr(registered)}"
-                    list="medicineListResults"
-                    onkeydown="
-                      if(event.key === 'Enter'){
-                        resultSearch();
-                      }
-                    "
-                  >
-
-                  <datalist id="medicineListResults">
-
-                    ${medicines.map(m => `
-                      <option value="${m}">
-                    `).join("")}
-
-                  </datalist>
-
-                  <button
-                    class="btn-primary"
-                    onclick="resultSearch()"
-                  >
-                    Pesquisar
-                  </button>
-
+                <div class="info-icon">
+                  ${icons.check}
                 </div>
 
+                <h3>
+                  Verifique
+                </h3>
+
+                <p>
+                  Consulte a disponibilidade antes de
+                  sair de casa.
+                </p>
+
               </div>
+
+
+              <div class="info-card">
+
+                <div class="info-icon">
+                  ${icons.route}
+                </div>
+
+                <h3>
+                  Vá
+                </h3>
+
+                <p>
+                  Escolha uma farmácia e veja a informação
+                  necessária para chegar até ela.
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      `;
+    }
+
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    function handleSearchKey(event) {
+
+      if (event.key === "Enter") {
+        searchMedicine();
+      }
+
+    }
+
+
+    function searchMedicine() {
+
+      const input = document.getElementById("medicineInput");
+
+      if (!input) {
+        return;
+      }
+
+      const value = input.value.trim();
+
+      if (!value) {
+
+        showToast("Digite o nome de um medicamento.");
+
+        input.focus();
+
+        return;
+      }
+
+      search(value);
+    }
+
+
+    function search(value) {
+
+      const medicine = medicines.find(
+        item => item.toLowerCase() === value.toLowerCase()
+      );
+
+      if (!medicine) {
+
+        notFound(value);
+
+        return;
+      }
+
+      results(medicine);
+    }
+
+
+    /* =========================
+       RESULTS
+    ========================= */
+
+    function results(medicine) {
+
+      if (!medicines.includes(medicine)) {
+        notFound(medicine);
+        return;
+      }
+
+
+      const app = document.getElementById("app");
+
+      app.innerHTML = `
+
+        <section class="results-section">
+
+          <div class="container">
+
+            <div class="page-heading">
+
+              <div class="heading-left">
+
+                <h1>
+                  ${medicine}
+                </h1>
+
+                <p>
+                  Farmácias com informação disponível
+                  para este medicamento.
+                </p>
+
+              </div>
+
+              <button
+                class="back-btn"
+                onclick="goHome()"
+              >
+                ← Nova pesquisa
+              </button>
 
             </div>
 
 
             <div class="results-toolbar">
 
-              <div class="results-count">
-                ${pharmacies.length}
-                farmácias encontradas
+              <div class="result-count">
+                ${pharmacies.length} farmácias encontradas
               </div>
 
               <select
                 class="filter-select"
-                onchange="filterResults(this.value, '${escapeAttr(registered)}')"
+                onchange="filterPharmacies(this.value)"
               >
 
                 <option value="all">
@@ -1999,7 +1695,7 @@
                 </option>
 
                 <option value="available">
-                  Disponíveis
+                  Disponível
                 </option>
 
                 <option value="limited">
@@ -2007,7 +1703,7 @@
                 </option>
 
                 <option value="unavailable">
-                  Não disponíveis
+                  Não disponível
                 </option>
 
               </select>
@@ -2016,14 +1712,11 @@
 
 
             <div
-              class="pharmacy-list"
-              id="pharmacyList"
+              id="pharmacyGrid"
+              class="pharmacy-grid"
             >
 
-              ${pharmacies
-                .map(p => pharmacyCard(p, registered))
-                .join("")
-              }
+              ${renderPharmacies(pharmacies)}
 
             </div>
 
@@ -2031,214 +1724,147 @@
 
         </section>
 
-        ${footer()}
-
       `;
-
     }
 
 
-    /* =====================================================
-       PESQUISA DENTRO DOS RESULTADOS
-    ===================================================== */
+    /* =========================
+       PHARMACIES
+    ========================= */
 
-    function resultSearch() {
+    function renderPharmacies(list) {
 
-      const input =
-        document.getElementById("resultSearch");
+      if (!list.length) {
 
-      const value =
-        (input?.value || "").trim();
+        return `
 
+          <div class="not-found">
 
-      if(!value) {
+            <div class="not-found-icon">
+              ${icons.alert}
+            </div>
 
-        toast(
-          "Digite o nome do medicamento."
-        );
+            <h2>
+              Nenhuma farmácia encontrada
+            </h2>
 
-        return;
-
-      }
-
-
-      const medicine =
-        medicines.find(
-          m =>
-            m.toLowerCase() ===
-            value.toLowerCase()
-        );
-
-
-      if(medicine) {
-
-        results(medicine);
-
-      } else {
-
-        notFound(value);
-
-      }
-
-    }
-
-
-    /* =====================================================
-       FILTRO
-    ===================================================== */
-
-    function filterResults(filter, medicine) {
-
-      let list = pharmacies;
-
-
-      if(filter !== "all") {
-
-        list =
-          pharmacies.filter(
-            p => p.status === filter
-          );
-
-      }
-
-
-      const container =
-        document.getElementById("pharmacyList");
-
-
-      if(!container) return;
-
-
-      if(list.length === 0) {
-
-        container.innerHTML = `
-
-          <div class="not-found-note">
-
-            Não existem farmácias com este estado
-            para a pesquisa actual.
+            <p>
+              Não existem farmácias que correspondam
+              ao filtro selecionado.
+            </p>
 
           </div>
 
         `;
-
-        return;
-
       }
 
 
-      container.innerHTML =
-        list
-          .map(
-            p => pharmacyCard(p, medicine)
-          )
-          .join("");
+      return list.map(pharmacy => {
 
-    }
+        let statusText = "";
+        let messageClass = "";
+
+        if (pharmacy.status === "available") {
+
+          statusText = "Disponível";
+          messageClass = "good";
+
+        } else if (pharmacy.status === "limited") {
+
+          statusText = "Poucas unidades";
+          messageClass = "warning";
+
+        } else {
+
+          statusText = "Não disponível";
+          messageClass = "bad";
+
+        }
 
 
-    /* =====================================================
-       CARTÃO DA FARMÁCIA
-    ===================================================== */
+        return `
 
-    function pharmacyCard(p, medicine) {
+          <article class="pharmacy-card">
 
-      return `
+            <div class="pharmacy-top">
 
-        <article class="pharmacy-card">
+              <div>
 
-          <div class="pharmacy-top">
+                <div class="pharmacy-name">
+                  ${pharmacy.name}
+                </div>
 
-            <div>
+                <div class="pharmacy-location">
+                  ${icons.location}
 
-              <div class="pharmacy-name">
-                ${escapeHTML(p.name)}
+                  ${pharmacy.neighborhood},
+                  ${pharmacy.city}
+                </div>
+
               </div>
 
-              <div class="pharmacy-location">
 
-                ${icons.location}
+              <div class="status ${pharmacy.status}">
 
-                ${escapeHTML(p.location)}
+                <span class="status-dot"></span>
+
+                ${statusText}
 
               </div>
 
             </div>
 
 
-            <div class="status ${p.status}">
+            <div class="pharmacy-details">
 
-              <span class="status-dot"></span>
+              <div class="detail-item">
 
-              ${escapeHTML(p.statusText)}
+                <div class="detail-label">
+                  Distância
+                </div>
 
-            </div>
+                <div class="detail-value">
+                  ${pharmacy.distance}
+                </div>
 
-          </div>
-
-
-          <div class="pharmacy-data">
-
-            <div>
-
-              <span class="data-label">
-                Distância
-              </span>
-
-              <span class="data-value">
-                ${escapeHTML(p.distance)}
-              </span>
-
-            </div>
+              </div>
 
 
-            <div>
+              <div class="detail-item">
 
-              <span class="data-label">
-                Fila
-              </span>
+                <div class="detail-label">
+                  Fila
+                </div>
 
-              <span class="data-value">
-                ${escapeHTML(p.queue)}
-              </span>
+                <div class="detail-value">
+                  ${pharmacy.queue}
+                </div>
 
-            </div>
+              </div>
 
 
-            <div>
+              <div class="detail-item">
 
-              <span class="data-label">
-                Horário
-              </span>
+                <div class="detail-label">
+                  Horário
+                </div>
 
-              <span class="data-value">
-                ${escapeHTML(p.hours)}
-              </span>
+                <div class="detail-value">
+                  ${pharmacy.hours}
+                </div>
+
+              </div>
 
             </div>
 
 
-            <div>
+            <div class="availability-message ${messageClass}">
 
-              <span class="data-label">
-                Stock
-              </span>
+              ${icons.check}
 
-              <span class="data-value">
-                ${escapeHTML(p.stock)}
-              </span>
+              ${pharmacy.message}
 
-            </div>
-
-          </div>
-
-
-          <div class="pharmacy-bottom">
-
-            <div class="last-update">
-
-              Informação actualizada
-              ${escapeHTML(p.updated)}
+              · ${pharmacy.updated}
 
             </div>
 
@@ -2246,199 +1872,228 @@
             <div class="card-actions">
 
               <button
-                class="btn-secondary"
-                onclick="details(${p.id}, '${escapeAttr(medicine)}')"
+                class="action-btn"
+                onclick="showPharmacy(${pharmacy.id})"
               >
-                Ver detalhes
+                ${icons.info}
+                Detalhes
               </button>
 
               <button
-                class="btn-route"
-                onclick="route('${escapeAttr(p.name)}')"
+                class="action-btn primary"
+                onclick="showRoute('${pharmacy.name}')"
               >
-
                 ${icons.route}
-
-                Como chegar
-
+                Ver rota
               </button>
 
             </div>
 
-          </div>
+          </article>
 
-        </article>
+        `;
 
-      `;
+      }).join("");
+    }
+
+
+    /* =========================
+       FILTER
+    ========================= */
+
+    function filterPharmacies(filter) {
+
+      let filtered = pharmacies;
+
+      if (filter !== "all") {
+
+        filtered = pharmacies.filter(
+          pharmacy => pharmacy.status === filter
+        );
+
+      }
+
+      const grid = document.getElementById("pharmacyGrid");
+
+      if (grid) {
+        grid.innerHTML = renderPharmacies(filtered);
+      }
 
     }
 
 
-    /* =====================================================
-       DETALHES
-    ===================================================== */
+    /* =========================
+       PHARMACY DETAILS
+    ========================= */
 
-    function details(id, medicine) {
+    function showPharmacy(id) {
 
-      const pharmacy =
-        pharmacies.find(
-          p => p.id === id
-        );
+      const pharmacy = pharmacies.find(
+        item => item.id === id
+      );
+
+      if (!pharmacy) {
+        return;
+      }
 
 
-      if(!pharmacy) return;
+      const app = document.getElementById("app");
+
+      let statusText = "";
+
+      if (pharmacy.status === "available") {
+        statusText = "Disponível";
+      } else if (pharmacy.status === "limited") {
+        statusText = "Poucas unidades";
+      } else {
+        statusText = "Não disponível";
+      }
 
 
-      document.getElementById("app").innerHTML = `
+      app.innerHTML = `
 
-        <section class="page">
+        <section class="detail-page">
 
-          <div class="details-page">
+          <div class="container">
 
             <button
               class="back-btn"
-              onclick="results('${escapeAttr(medicine)}')"
+              onclick="history.back()"
+              style="margin-bottom: 18px;"
             >
-              ← Voltar para resultados
+              ← Voltar
             </button>
 
 
-            <div class="details-card">
+            <div class="detail-box">
 
-              <div class="details-header">
+              <div class="detail-header">
+
+                <div class="detail-title">
+
+                  <h1>
+                    ${pharmacy.name}
+                  </h1>
+
+                  <p>
+                    ${pharmacy.neighborhood},
+                    ${pharmacy.city}
+                  </p>
+
+                </div>
+
 
                 <div class="status ${pharmacy.status}">
 
                   <span class="status-dot"></span>
 
-                  ${escapeHTML(pharmacy.statusText)}
+                  ${statusText}
 
                 </div>
-
-                <h1>
-                  ${escapeHTML(pharmacy.name)}
-                </h1>
-
-                <p>
-                  ${icons.location}
-                  ${escapeHTML(pharmacy.location)}
-                </p>
 
               </div>
 
 
-              <div class="details-body">
+              <div class="detail-section">
 
-                <div class="medicine-highlight">
+                <h3>
+                  Informação da farmácia
+                </h3>
 
-                  <div>
 
-                    <small>
-                      Medicamento pesquisado
-                    </small>
+                <div class="detail-row">
+
+                  <div class="detail-box-item">
+
+                    <span>
+                      Localização
+                    </span>
 
                     <strong>
-                      ${escapeHTML(medicine)}
+                      ${pharmacy.neighborhood},
+                      ${pharmacy.city}
                     </strong>
 
                   </div>
 
-                  <strong>
-                    ${escapeHTML(pharmacy.stock)}
-                  </strong>
 
-                </div>
-
-
-                <div class="detail-grid">
-
-                  <div class="detail-item">
+                  <div class="detail-box-item">
 
                     <span>
                       Distância
                     </span>
 
                     <strong>
-                      ${escapeHTML(pharmacy.distance)}
+                      ${pharmacy.distance}
                     </strong>
 
                   </div>
 
 
-                  <div class="detail-item">
+                  <div class="detail-box-item">
+
+                    <span>
+                      Horário de funcionamento
+                    </span>
+
+                    <strong>
+                      ${pharmacy.hours}
+                    </strong>
+
+                  </div>
+
+
+                  <div class="detail-box-item">
 
                     <span>
                       Fila estimada
                     </span>
 
                     <strong>
-                      ${escapeHTML(pharmacy.queue)}
-                    </strong>
-
-                  </div>
-
-
-                  <div class="detail-item">
-
-                    <span>
-                      Horário
-                    </span>
-
-                    <strong>
-                      ${escapeHTML(pharmacy.hours)}
-                    </strong>
-
-                  </div>
-
-
-                  <div class="detail-item">
-
-                    <span>
-                      Última verificação
-                    </span>
-
-                    <strong>
-                      ${escapeHTML(pharmacy.updated)}
+                      ${pharmacy.queue}
                     </strong>
 
                   </div>
 
                 </div>
 
-
-                <div class="detail-notice">
-
-                  Esta informação é baseada nos dados
-                  registados no protótipo do InfoServ.
-                  A disponibilidade pode alterar-se,
-                  por isso recomenda-se confirmar antes
-                  de se deslocar.
-
-                </div>
+              </div>
 
 
-                <div class="details-actions">
+              <div class="detail-section">
 
-                  <button
-                    class="btn-route"
-                    onclick="route('${escapeAttr(pharmacy.name)}')"
-                  >
+                <h3>
+                  Disponibilidade
+                </h3>
 
-                    ${icons.route}
+                <div class="availability-message ${
+                  pharmacy.status === "available"
+                    ? "good"
+                    : pharmacy.status === "limited"
+                      ? "warning"
+                      : "bad"
+                }">
 
-                    Iniciar rota
+                  ${icons.check}
 
-                  </button>
-
-
-                  <button
-                    class="btn-secondary"
-                    onclick="results('${escapeAttr(medicine)}')"
-                  >
-                    Ver outras farmácias
-                  </button>
+                  ${pharmacy.message}
+                  · Atualizado ${pharmacy.updated}
 
                 </div>
+
+              </div>
+
+
+              <div class="detail-section">
+
+                <button
+                  class="action-btn primary"
+                  style="width: 100%;"
+                  onclick="showRoute('${pharmacy.name}')"
+                >
+                  ${icons.route}
+                  Ver rota para esta farmácia
+                </button>
 
               </div>
 
@@ -2448,123 +2103,199 @@
 
         </section>
 
-        ${footer()}
+      `;
+
+    }
+
+
+    /* =========================
+       NOT FOUND
+    ========================= */
+
+    function notFound(medicine) {
+
+      const app = document.getElementById("app");
+
+      app.innerHTML = `
+
+        <section class="container">
+
+          <div class="not-found">
+
+            <div class="not-found-icon">
+              ${icons.alert}
+            </div>
+
+            <h2>
+              Medicamento não encontrado
+            </h2>
+
+            <p>
+              Ainda não existem informações cadastradas
+              no InfoServ para
+              <strong>${medicine}</strong>.
+            </p>
+
+
+            <button
+              class="action-btn primary"
+              style="max-width: 230px; margin: 22px auto 0;"
+              onclick="goHome()"
+            >
+              Fazer nova pesquisa
+            </button>
+
+
+            <div class="registered">
+
+              <p>
+                Medicamentos disponíveis no protótipo
+              </p>
+
+
+              <div class="quick-searches">
+
+                ${medicines.map(item => `
+
+                  <button
+                    class="quick-btn"
+                    onclick="search('${item}')"
+                  >
+                    ${item}
+                  </button>
+
+                `).join("")}
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
 
       `;
 
     }
 
 
-    /* =====================================================
-       ROTA
-    ===================================================== */
+    /* =========================
+       ROUTE
+    ========================= */
 
-    function route(name) {
+    function showRoute(pharmacyName) {
 
-      toast(
-        "Rota para " +
-        name +
-        " seleccionada."
+      showToast(
+        `A rota para ${pharmacyName} será disponibilizada nesta etapa.`
       );
 
     }
 
 
-    /* =====================================================
-       COMO FUNCIONA
-    ===================================================== */
+    /* =========================
+       HOW IT WORKS
+    ========================= */
 
-    function showAbout() {
+    function showHowItWorks() {
 
-      document.getElementById("app").innerHTML = `
+      const app = document.getElementById("app");
 
-        <section class="page">
+      app.innerHTML = `
 
-          <div class="about-page">
+        <section class="detail-page">
 
-            <div class="about-hero">
+          <div class="container">
 
-              <h1>
-                Menos procura.
-                <span>Mais informação.</span>
-              </h1>
+            <div class="detail-box">
 
-              <p>
-                O InfoServ ajuda o cliente a encontrar
-                informação sobre medicamentos e farmácias
-                antes de iniciar a sua deslocação.
-              </p>
+              <div class="detail-header">
 
-            </div>
+                <div class="detail-title">
 
+                  <h1>
+                    Como funciona
+                  </h1>
 
-            <div class="steps">
+                  <p>
+                    Encontre informações antes de se deslocar.
+                  </p>
 
-              <div class="step">
-
-                <div class="step-number">
-                  01
                 </div>
-
-                <h3>
-                  Pesquisar
-                </h3>
-
-                <p>
-                  O cliente informa o nome do medicamento
-                  que pretende encontrar.
-                </p>
 
               </div>
 
 
-              <div class="step">
+              <div class="detail-section">
 
-                <div class="step-number">
-                  02
+                <div class="detail-row">
+
+                  <div class="detail-box-item">
+
+                    <span>
+                      01
+                    </span>
+
+                    <strong>
+                      Pesquise o medicamento
+                    </strong>
+
+                  </div>
+
+
+                  <div class="detail-box-item">
+
+                    <span>
+                      02
+                    </span>
+
+                    <strong>
+                      Consulte as farmácias
+                    </strong>
+
+                  </div>
+
+
+                  <div class="detail-box-item">
+
+                    <span>
+                      03
+                    </span>
+
+                    <strong>
+                      Verifique a disponibilidade
+                    </strong>
+
+                  </div>
+
+
+                  <div class="detail-box-item">
+
+                    <span>
+                      04
+                    </span>
+
+                    <strong>
+                      Escolha onde ir
+                    </strong>
+
+                  </div>
+
                 </div>
-
-                <h3>
-                  Consultar
-                </h3>
-
-                <p>
-                  O sistema apresenta as farmácias que
-                  possuem informações registadas para
-                  aquele medicamento.
-                </p>
 
               </div>
 
 
-              <div class="step">
+              <div class="detail-section">
 
-                <div class="step-number">
-                  03
-                </div>
+                <p style="color: var(--muted); font-size: 14px; line-height: 1.7;">
 
-                <h3>
-                  Escolher
-                </h3>
+                  O InfoServ foi pensado para reduzir deslocações
+                  desnecessárias e facilitar o acesso à informação
+                  sobre medicamentos disponíveis nas farmácias.
 
-                <p>
-                  O cliente consulta a disponibilidade,
-                  localização e outros dados antes de
-                  decidir onde ir.
                 </p>
 
               </div>
-
-            </div>
-
-
-            <div class="about-note">
-
-              <strong>Importante:</strong>
-              o protótipo utiliza dados de demonstração.
-              Numa versão completa, as informações serão
-              actualizadas através da plataforma InfoServ
-              pelos agentes e administradas pelo sistema.
 
             </div>
 
@@ -2572,171 +2303,154 @@
 
         </section>
 
-        ${footer()}
-
       `;
 
     }
 
 
-    /* =====================================================
-       FOOTER
-    ===================================================== */
+    /* =========================
+       ABOUT
+    ========================= */
 
-    function footer() {
+    function showAbout() {
 
-      return `
+      const app = document.getElementById("app");
 
-        <footer class="footer">
+      app.innerHTML = `
 
-          <div class="footer-inner">
+        <section class="detail-page">
 
-            <div class="footer-main">
+          <div class="container">
 
-              <div class="footer-brand">
-                InfoServ
+            <div class="detail-box">
+
+              <div class="detail-header">
+
+                <div class="detail-title">
+
+                  <h1>
+                    Sobre o InfoServ
+                  </h1>
+
+                  <p>
+                    Sistema Inteligente de Disponibilização
+                    de Serviços Essenciais.
+                  </p>
+
+                </div>
+
               </div>
 
-              <p class="footer-description">
 
-                Informação sobre serviços de farmácia
-                para ajudar o cliente a pesquisar,
-                verificar e decidir antes de se deslocar.
+              <div class="detail-section">
 
-              </p>
+                <h3>
+                  O que é o InfoServ?
+                </h3>
 
-            </div>
+                <p style="color: var(--muted); font-size: 14px; line-height: 1.8;">
 
+                  O InfoServ é uma solução digital criada para
+                  facilitar o acesso à informação sobre serviços
+                  essenciais. Nesta primeira fase, o protótipo
+                  está focado no serviço de farmácia e na procura
+                  de medicamentos.
 
-            <div>
+                </p>
 
-              <div class="footer-title">
-                Navegação
               </div>
 
-              <button
-                class="footer-link"
-                onclick="home()"
-              >
-                Início
-              </button>
 
-              <button
-                class="footer-link"
-                onclick="showAbout()"
-              >
-                Como funciona
-              </button>
+              <div class="detail-section">
 
-            </div>
+                <h3>
+                  Objetivo
+                </h3>
 
+                <p style="color: var(--muted); font-size: 14px; line-height: 1.8;">
 
-            <div>
+                  Permitir que o utilizador pesquise um medicamento,
+                  consulte informações sobre farmácias e tome uma
+                  decisão antes de iniciar o seu deslocamento.
 
-              <div class="footer-title">
-                InfoServ
+                </p>
+
               </div>
 
-              <div class="footer-link">
-                Encontre.
-              </div>
 
-              <div class="footer-link">
-                Verifique.
-              </div>
+              <div class="detail-section">
 
-              <div class="footer-link">
-                Vá.
+                <button
+                  class="action-btn primary"
+                  style="width: 100%;"
+                  onclick="goHome()"
+                >
+                  Começar uma pesquisa
+                  ${icons.arrow}
+                </button>
+
               </div>
 
             </div>
 
           </div>
 
-
-          <div class="footer-bottom">
-
-            <span>
-              © 2026 InfoServ. Todos os direitos reservados.
-            </span>
-
-            <span>
-              Protótipo de demonstração
-            </span>
-
-          </div>
-
-        </footer>
+        </section>
 
       `;
 
     }
 
 
-    /* =====================================================
+    /* =========================
+       HOME
+    ========================= */
+
+    function goHome() {
+
+      document.getElementById("app").innerHTML = home();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* =========================
        TOAST
-    ===================================================== */
+    ========================= */
 
-    let toastTimer;
-
-
-    function toast(message) {
-
-      const element =
-        document.getElementById("toast");
+    let toastTimeout;
 
 
-      element.textContent =
-        message;
+    function showToast(message) {
+
+      const toast = document.getElementById("toast");
+
+      toast.textContent = message;
+
+      toast.classList.add("show");
 
 
-      element.classList.add("show");
+      clearTimeout(toastTimeout);
 
 
-      clearTimeout(toastTimer);
+      toastTimeout = setTimeout(() => {
 
+        toast.classList.remove("show");
 
-      toastTimer =
-        setTimeout(() => {
-
-          element.classList.remove("show");
-
-        }, 2800);
+      }, 3200);
 
     }
 
 
-    /* =====================================================
-       SEGURANÇA
-    ===================================================== */
+    /* =========================
+       INITIALIZE
+    ========================= */
 
-    function escapeHTML(value) {
-
-      return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-    }
-
-
-    function escapeAttr(value) {
-
-      return String(value)
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'")
-        .replace(/"/g, "&quot;");
-
-    }
-
-
-    /* =====================================================
-       INICIALIZAÇÃO
-    ===================================================== */
-
-    home();
+    goHome();
 
   </script>
 
